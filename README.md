@@ -1,2 +1,2 @@
-## WEB-Project Technopark vk-education
+## Task 1
 ### Busarov Nikita ios11 Fall-2023

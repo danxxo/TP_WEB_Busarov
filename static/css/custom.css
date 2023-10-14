@@ -4,6 +4,18 @@ main > .container {
     max-width: 100%;
 }
 
+.centered-content-div {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.paginator-mg {
+    margin: 40px 0px 0px 60px;
+}
+
 #busques {
     font-size: 40px;
 }
@@ -34,22 +46,30 @@ main > .container {
 }
 
 .question {
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
+    background-color: #ddffd5;
     padding: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
     border-radius: 10px;
 }
 
+.question-underbar {
+    padding: 30px;
+
+}
+
+
+
 .line-before-answer-form {
-    border-bottom: 5px solid gray;
+    border-bottom: 5px solid #9FE48E;
     margin-left: 30px;
     margin-top: 40px;
 }
 
 .settings-textareas {
     width: 50%;
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
     border-radius: 10px;
     min-height: 10px;
     margin-bottom: 10px;  
@@ -58,7 +78,7 @@ main > .container {
 
 .new-question-small-textarea {
     width: 100%;
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
     border-radius: 10px;
     min-height: 30px;
     margin-bottom: 10px;  
@@ -67,7 +87,7 @@ main > .container {
 
 .new-question-big-textarea {
     width: 100%;
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
     border-radius: 10px;
     min-height: 220px;
     margin-bottom: 10px;  
@@ -80,7 +100,7 @@ main > .container {
 
 .input-form-textarea {
     width: 100%;
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
     margin-top: 35px;
     border-radius: 10px;
     min-height: 200px;
@@ -88,7 +108,8 @@ main > .container {
 }
 
 .answer {
-    border: 5px solid gray;
+    border: 5px solid #9FE48E;
+    background-color: #ddffd5;
     padding: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
@@ -96,7 +117,7 @@ main > .container {
 }
 
 .question-detail {
-    border-bottom: 5px solid gray;
+    border-bottom: 5px solid #9FE48E;
     padding: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
@@ -177,4 +198,24 @@ main > .container {
 .settings-img {
     width: 200px;
     height: 200px;
+}
+
+.paginator-prev {
+    border: 3px solid #c4f6b8;
+    background-color: #f5fff2;
+    color: #94ff7a;
+    font-size: 25px;
+}
+
+.paginator-number {
+    border: 3px solid #c4f6b8;
+    color: #94ff7a;
+    font-size: 25px;
+}
+
+.paginator-next {
+    border: 3px solid #c4f6b8;
+    background-color: #aaff90;
+    color: white;
+    font-size: 25px;
 }

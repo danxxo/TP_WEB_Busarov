@@ -13,7 +13,7 @@ main > .container {
 }
 
 .paginator-mg {
-    margin: 40px 0px 0px 60px;
+    margin: 30px 0px 0px 30px;
 }
 
 #busques {
@@ -218,4 +218,18 @@ main > .container {
     background-color: #aaff90;
     color: white;
     font-size: 25px;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+    background-color: #aaff90 !important;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #d6ffc1 !important;
+}
+.btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary:visited {
+    /* background-color: #aaff90 !important; */
+    border: 2px solid #9aff7c !important;
+    color: #85ff5f;
 }

@@ -109,7 +109,7 @@ main > .container {
 
 .answer {
     border: 5px solid #9FE48E;
-    background-color: #ddffd5;
+    background-color: #c1ffb3;
     padding: 30px;
     margin-bottom: 30px;
     margin-left: 30px;
@@ -169,7 +169,7 @@ main > .container {
 
 .tags-right-bar {
     width: auto;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     font-size: 20px;
     padding-right: 30%;
 }
@@ -232,4 +232,53 @@ main > .container {
     /* background-color: #aaff90 !important; */
     border: 2px solid #9aff7c !important;
     color: #85ff5f;
+}
+.tags-bg-green{
+    background-color: #5ba644;
+}
+
+.tags-bg-dark{
+    background-color: #232323;
+    color: white;
+}
+
+.tags-bg-red{
+    background-color: #c93737;
+}
+
+.tags-bg-pink{
+    background-color: #da2a9f;
+}
+
+.tags-bg-gray{
+    background-color: #a9a9a9;
+}
+
+.tags-bg-orange{
+    background-color: #ff9640;
+}
+
+.tags-bg-blue{
+    background-color: blue;
+    color: white;
+}
+
+.tags-bg-purple{
+    background-color: purple;
+    color: white;
+}
+
+.tags-bg-indigo{
+    background-color: indigo;
+    color: white;
+}
+
+.tags-bg-burgundy{
+    background-color: #600000;
+    color: white;
+}
+
+.top-user{
+    color: white;
+    font-size: 20px;
 }

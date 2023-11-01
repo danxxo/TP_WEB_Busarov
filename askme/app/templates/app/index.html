@@ -1,0 +1,65 @@
+{% extends "askme/base.html" %}
+{% load static %}
+
+{% block title %}
+  buSQues
+{% endblock %}
+
+{% block content %}
+            <!-- QUESTIONS -->
+            <h1>Questions</h1>
+
+            {% for q in questions %}
+            <!-- Question1 -->
+            <div class="row question">
+                <div class="col-2">
+                    <a href="{% url 'app:question_detail' q.id %}">
+                      <img src="{% static '/img/Avatar_rapuncel.jpg' %}" class="question-image" alt="question image">
+                    </a>
+                    <div style="margin-top:20px;">
+                      <div class="centered-content-div">
+                        <button><img src="{% static '/img/arrow.png' %}" style="width: 20px; height: 20px;" alt=""></button>
+                      </div>
+                      <div class="centered-content-div">
+                        {{ q.likes }}
+                      </div>
+                      <div class="centered-content-div">
+                        <button><img src="{% static '/img/arrow.png' %}" style="width: 20px; height: 20px; rotate: 180deg;" alt=""></button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-10">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="question-title">
+                          <a href="{% url 'app:question_detail' q.id %}">{{ q.title }}</a>
+                      </div>
+                      <div class="question-text">
+                          {{ q.content }}
+                      </div>
+                    </div>
+                    <div class="row" style="padding-left: 14px;">
+                      <div class="col-12 question-info">
+                        <h4>Tags</h4>
+                        <div class="tags-question">
+                          {% for t in q.tags %}
+                          <span class="badge tags-bg-green">{{ t }}</span>
+                          {% endfor %}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}       
+        <nav aria-label="Page navigation example" class="paginator-mg">
+          <ul class="pagination">
+            <li class="page-item "><a class="page-link paginator-prev" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link paginator-number" href="#">1</a></li>
+            <li class="page-item"><a class="page-link paginator-number" href="#">2</a></li>
+            <li class="page-item"><a class="page-link paginator-number" href="#">3</a></li>
+            <li class="page-item"><a class="page-link paginator-next" href="#">Next</a></li>
+          </ul>
+        </nav>
+{% endblock %}

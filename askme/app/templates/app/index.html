@@ -52,8 +52,11 @@
                   </div>
                 </div>
             </div>
-        {% endfor %}       
-        <nav aria-label="Page navigation example" class="paginator-mg">
+        {% endfor %}   
+        
+        {% include 'app/paginator.html' %}
+
+        <!-- <nav aria-label="Page navigation example" class="paginator-mg">
           <ul class="pagination">
             <li class="page-item "><a class="page-link paginator-prev" href="#">Previous</a></li>
             <li class="page-item"><a class="page-link paginator-number" href="#">1</a></li>
@@ -61,5 +64,5 @@
             <li class="page-item"><a class="page-link paginator-number" href="#">3</a></li>
             <li class="page-item"><a class="page-link paginator-next" href="#">Next</a></li>
           </ul>
-        </nav>
+        </nav> -->
 {% endblock %}

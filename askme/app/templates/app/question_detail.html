@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  buSQues
+  Detail
 {% endblock %}
 
 {% block content %}
@@ -50,7 +50,7 @@
             <!-- ANSWERS -->
             <h3 style="text-align: center; margin-bottom: 30px;">Answers</h3>
 
-          {% for ans in answers %}
+          {% for ans in page %}
             <!-- Answer1 -->
             <div class="row answer">
               <div class="col-1" style="max-width: 60px;">
@@ -100,14 +100,6 @@
 
             </div>
 
-            <nav aria-label="Page navigation example" class="paginator-mg">
-              <ul class="pagination">
-                <li class="page-item "><a class="page-link paginator-prev" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link paginator-number" href="#">1</a></li>
-                <li class="page-item"><a class="page-link paginator-number" href="#">2</a></li>
-                <li class="page-item"><a class="page-link paginator-number" href="#">3</a></li>
-                <li class="page-item"><a class="page-link paginator-next" href="#">Next</a></li>
-              </ul>
-            </nav>
+            {% include 'app/paginator.html' %}
 
 {% endblock %}

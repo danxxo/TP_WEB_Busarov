@@ -107,6 +107,13 @@ main > .container {
     margin-bottom: 10px;
 }
 
+.my-page-item-active {
+    z-index: 1;
+    color: #bc2929;
+    background-color: rgba(189, 255, 181, 0.78);
+    border-color: #00ff3c;
+}
+
 .answer {
     border: 5px solid #9FE48E;
     background-color: #c1ffb3;

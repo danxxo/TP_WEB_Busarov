@@ -1,35 +1,35 @@
-{% if questions.has_other_pages %}
+{% if page.has_other_pages %}
 <nav aria-label="Page navigation example" class="paginator-mg">
     <ul class="pagination">
-        {% if questions.has_previous %}
+        {% if page.has_previous %}
             <li class="page-item">
                 <a class="page-link paginator-prev" href="?page=1" tabindex="-1">First</a>
             </li>
             <li class="page-item">
-                <a class="page-link paginator-next" href="?page={{ questions.previous_page_number }}" tabindex="-1">Previous</a>
+                <a class="page-link paginator-next" href="?page={{ page.previous_page_number }}" tabindex="-1">Previous</a>
             </li> 
         {% else %}
             <li class="page-item disabled">
                 <a class="page-link paginator-next" href="#" tabindex="-1">Previous</a>
             </li> 
         {% endif %}
-        {% for num in questions.paginator.page_range %}
-            {% if questions.number == num %}
-                <li class="page-item active">
-                    <a class="page-link paginator-number" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+        {% for num in page.paginator.page_range %}
+            {% if page.number == num %}
+                <li class="page-item">
+                    <a class="page-link my-page-item-active paginator-number" href="#">{{ num }} <span class="sr-only">(current)</span></a>
                 </li>
-            {% elif num > questions.number|add:'-3' and num < questions.number|add:'3' %}
+            {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
                 <li class="page-item">
                     <a class="page-link paginator-number" href="?page={{ num }}">{{ num }}</a>
                 </li>
             {% endif %}
         {% endfor %}
-        {% if questions.has_next %}
+        {% if page.has_next %}
             <li class="page-item">
-                <a class="page-link paginator-next" href="?page={{ questions.next_page_number }}">Next</a>
+                <a class="page-link paginator-next" href="?page={{ page.next_page_number }}">Next</a>
             </li>
             <li class="page-item">
-                <a class="page-link paginator-prev" href="?page={{ questions.paginator.num_pages }}">Last</a>
+                <a class="page-link paginator-prev" href="?page={{ page.paginator.num_pages }}">Last</a>
             </li>
         {% else %}
             <li class="page-item disabled">

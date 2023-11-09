@@ -1,7 +1,4 @@
-import imp
 from random import randrange
-import re
-from tkinter import N
 from django.shortcuts import render
 from django.core.paginator import Paginator
 
@@ -16,17 +13,18 @@ QUESTIONS = [
     } for i in range(1000)
 ]
 
-def paginate(objects, request):
+def paginate(objects, request, per_page=5):
     page = request.GET.get('page')
-    if page is None:
-        page=1
+
     try:
-        print(int(15.2))
         page = int(page)
-    except ValueError:
+    except:
         page = 1
 
-    paginator = Paginator(objects, per_page=5)
+    if page <= 0:
+        page = 1
+
+    paginator = Paginator(objects, per_page)
     if page > paginator.num_pages:
         page = paginator.num_pages
 
@@ -38,7 +36,13 @@ def paginate(objects, request):
 def index(request):
     return render(request,
                   'app/index.html',
-                  {'questions': paginate(QUESTIONS, request)})
+                  {'page': paginate(QUESTIONS, request)})
+
+
+def hot(request):
+    return render(request,
+                'app/index.html',
+                {'page': paginate(QUESTIONS, request)})
 
 def question_detail(request, question_id):
     question = QUESTIONS[question_id]
@@ -48,14 +52,14 @@ def question_detail(request, question_id):
         'id': i,
         'content': f'Contents of Answer {i} from User. Really helpful answer ',
         'likes': randrange(200) 
-    } for i in range(randrange(5))
+    } for i in range(10)
 ]
 
     return render(
         request,
         'app/question_detail.html',
         {'question': question,
-         'answers': ANSWERS}
+         'page': paginate(ANSWERS, request, per_page=3)}
     )
 
 def user_settings(request):
@@ -85,6 +89,7 @@ def ask(request):
 def tag(request, tag):
     return render(
         request,
-        'tagged_list.html',
-        {'tag': tag}
+        'app/tagged_list.html',
+        {'tag': tag,
+         'page': paginate(QUESTIONS, request)}
     )

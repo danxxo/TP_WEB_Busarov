@@ -1,6 +1,7 @@
 from random import randrange
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from .models import Question, Answer, Tag, Profile
 
 
 QUESTIONS = [
@@ -34,9 +35,10 @@ def paginate(objects, request, per_page=5):
     return paginator.page(page)
 
 def index(request):
+    questions = Question.objects.all()
     return render(request,
                   'app/index.html',
-                  {'page': paginate(QUESTIONS, request)})
+                  {'page': paginate(questions, request)})
 
 
 def hot(request):
@@ -45,7 +47,8 @@ def hot(request):
                 {'page': paginate(QUESTIONS, request)})
 
 def question_detail(request, question_id):
-    question = QUESTIONS[question_id]
+    question = Question.objects.get(pk=question_id)
+    answers = Answer.objects.filter(question=question)
 
     ANSWERS = [
     {
@@ -59,7 +62,7 @@ def question_detail(request, question_id):
         request,
         'app/question_detail.html',
         {'question': question,
-         'page': paginate(ANSWERS, request, per_page=3)}
+         'page': paginate(answers, request, per_page=3)}
     )
 
 def user_settings(request):

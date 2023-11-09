@@ -42,7 +42,7 @@
                       <div class="col-12 question-info">
                         <h4>Tags</h4>
                         <div class="tags-question">
-                          {% for t in q.tags %}
+                          {% for t in q.tags.all  %}
                           <span class="badge tags-bg-green">{{ t }}</span>
                           {% endfor %}
                         </div>

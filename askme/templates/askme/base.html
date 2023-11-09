@@ -51,25 +51,11 @@
                     
                       <a href="{% url 'app:user_settings'%}">Settings</a>
                       <a href="{% url 'app:login' %}">Logout</a>
-                    
-              
-                    <!-- <span>Logout</span> -->
-                    
                   </div>
-                  <!-- <div class="col-6 navbar-settings-logout">
-                    
-                    <span>Logout</span>
-                  </div> -->
                 </div>
-                <!-- <p style="font-size: 18px;">USER1</p> -->
               </div>
             </div>
           </div>
-          <!-- AVATAR -->
-          <!-- <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">ASK!</button>
-          </form> -->
         </div>
       </div>
     </nav>
@@ -88,8 +74,10 @@
           <div class="col-4 right-bar">
             <!-- TOP_INFO -->
             <h1>Tags</h1>
+            {% for tag in top_tags %}
             <div class="tags-right-bar">
-              <span class="badge tags-bg-green">Python</span>
+              <span class="badge tags-bg-green">{{ tag.name }}</span>
+<!--               
               <span class="badge tags-bg-dark">CSS</span>
               <span class="badge tags-bg-red">Java</span>
               <span class="badge tags-bg-pink">VK</span>
@@ -98,20 +86,18 @@
               <span class="badge tags-bg-blue">Human History</span>
               <span class="badge tags-bg-purple">C--</span>
               <span class="badge tags-bg-burgundy">C0ding</span>
-              <span class="badge tags-bg-indigo">Society</span>
+              <span class="badge tags-bg-indigo">Society</span> -->
             </div>
+            {% endfor %}
+
             <h1>Top members</h1>
+            {% for member in top_members %}
             <div class="top-members">
               <div class="user">
-                <a href="#"><span class="badge bg-success top-user">User1</span></a>
-              </div>
-              <div class="user">
-                <a href="#"><span class="badge bg-success top-user">GeniosWunderkind</span></a>
-              </div>
-              <div class="user">
-                <a href="#"><span class="badge bg-success top-user">Miss her</span></a>
+                <a href="#"><span class="badge bg-success top-user">{{ member.profile.username }}</span></a>
               </div>
             </div>
+            {% endfor %}
 
         </div>
     </div>

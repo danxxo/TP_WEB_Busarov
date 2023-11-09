@@ -14,11 +14,15 @@ class Command(BaseCommand):
         parser.add_argument("ratio", type=int)
 
     def handle(self, *args, **kwargs):
+        print('Started')
         ratio = kwargs['ratio']
 
         profiles = []
         tags = []
+        isCorrectChoices = [False] * 6 + [True]
+        print(isCorrectChoices)
         
+        # Create User and Profile
         for i in range(ratio):
             new_user = User.objects.create_user(username=f'user{i}')
             new_user.set_password('pass')
@@ -32,9 +36,12 @@ class Command(BaseCommand):
             new_tag.save()
             tags.append(new_tag)
 
+        print('Users and Profiles created')
+        print('Start creating questions')
+        # create Question 
         for i in range(ratio * 10):
             user = random.choice(profiles)
-            title = f'Question'
+            title = f'Question {i}'
             content = f'I need to know how to spell {i}. such a hard number'
             question_tags = []
             for j in range(10):
@@ -48,15 +55,24 @@ class Command(BaseCommand):
                 content=content,
             )
             new_question.tags.set(question_tags)
+            likes = profiles[random.randrange(0, ratio/2-1):random.randrange(ratio/2, ratio-1)]
+            new_question.likes.set(likes)
             new_question.save()
+
+            # Create 10 Answers on Question
             for _ in range(10):
                 user = random.choice(profiles)
                 new_answer = Answer.objects.create(
                     question=new_question,
                     user=user,
                     content=f'That is simple to spell {i}. Answer by {user}',
-                    isCorrect=random.choice([True, False])
+                    isCorrect=random.choice(isCorrectChoices)
                 )
+                likes = profiles[random.randrange(0, ratio/2-1):random.randrange(ratio/2, ratio-1)]
+                new_question.likes.set(likes)
+                new_answer.likes.set(likes)
                 new_answer.save()
+        
+        print('Created!')
 
 

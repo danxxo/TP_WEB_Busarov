@@ -4,16 +4,6 @@ from django.core.paginator import Paginator
 from .models import Question, Answer, Tag, Profile
 
 
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question {i}',
-        'likes': randrange(1000),
-        'content': f'Question {i} content. A lot of text, many many unknown info',
-        'tags': [f'Tag1-{j}' for j in range(i, i+5)]
-    } for i in range(1000)
-]
-
 def paginate(objects, request, per_page=5):
     page = request.GET.get('page')
 
@@ -34,36 +24,48 @@ def paginate(objects, request, per_page=5):
 
     return paginator.page(page)
 
+def context_get(page=None, best_members=None, top_tags=None):
+    return {'page': page, 'best_members': best_members, 'top_tags': top_tags}
+
+
 def index(request):
-    questions = Question.objects.all()
+    questions = Question.objects.new_questions()
+    context = context_get(
+        page=paginate(questions, request),
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
     return render(request,
                   'app/index.html',
-                  {'page': paginate(questions, request)})
+                  context)
 
 
 def hot(request):
+    questions = Question.objects.hot_questions()
+    context = context_get(
+        page=paginate(questions, request),
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
     return render(request,
                 'app/index.html',
-                {'page': paginate(QUESTIONS, request)})
+                context)
 
 def question_detail(request, question_id):
     question = Question.objects.get(pk=question_id)
-    answers = Answer.objects.filter(question=question)
-
-    ANSWERS = [
-    {
-        'id': i,
-        'content': f'Contents of Answer {i} from User. Really helpful answer ',
-        'likes': randrange(200) 
-    } for i in range(10)
-]
+    answers = Answer.objects.top_answers(question_id)
+    context = context_get(
+        page=paginate(answers, request, per_page=5),
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
+    context['question'] = question
 
     return render(
         request,
         'app/question_detail.html',
-        {'question': question,
-         'page': paginate(answers, request, per_page=3)}
-    )
+        context
+        )
 
 def user_settings(request):
     return render(
@@ -90,9 +92,15 @@ def ask(request):
     )
 
 def tag(request, tag):
+    questions = Question.objects.tag_question(tag)
+    context = context_get(
+        page=paginate(questions, request),
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
+    context['tag'] = tag
     return render(
         request,
         'app/tagged_list.html',
-        {'tag': tag,
-         'page': paginate(QUESTIONS, request)}
+        context
     )

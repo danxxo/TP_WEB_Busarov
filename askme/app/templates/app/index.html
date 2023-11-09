@@ -21,7 +21,7 @@
                         <button><img src="{% static '/img/arrow.png' %}" style="width: 20px; height: 20px;" alt=""></button>
                       </div>
                       <div class="centered-content-div">
-                        {{ q.likes }}
+                        {{ q.likes.all.count }}
                       </div>
                       <div class="centered-content-div">
                         <button><img src="{% static '/img/arrow.png' %}" style="width: 20px; height: 20px; rotate: 180deg;" alt=""></button>

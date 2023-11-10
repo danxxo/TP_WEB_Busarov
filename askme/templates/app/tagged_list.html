@@ -1,0 +1,22 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ tag }}
+{% endblock %}
+
+{% block content %}
+  <!-- QUESTIONS -->
+  <!-- TAG -->
+  <h1>Tag: {{ tag }}</h1>
+
+  {% for question in page %}
+    {% include 'app/include/items/question_item.html' %}
+  {% endfor %}   
+
+  {% include 'app/paginator.html' %}
+
+{% endblock %}
+{% block right_bar %}
+  {% include 'app/include/templates/right_bar.html'%}
+{% endblock right_bar %}

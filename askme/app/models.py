@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -34,7 +35,7 @@ class TagManager(models.Manager):
 
 class Profile(models.Model):
     profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    userAvatar = models.ImageField(default='upload/default/user.png')
+    userAvatar = models.ImageField(default='static/img/user.png')
 
     objects = ProfileManager()
 
@@ -43,6 +44,9 @@ class Tag(models.Model):
     name = models.CharField(max_length=30)
 
     objects = TagManager()
+
+    def get_absolute_url(self):
+        return reverse('app:tag', kwargs={'tag': self.name})
 
     def __str__(self) -> str:
         return f'{self.name}'
@@ -63,7 +67,7 @@ class Question(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return f'Question: {self.pk}'
+        return f'Question:{self.pk}'
 
 
 class Answer(models.Model):
@@ -78,6 +82,6 @@ class Answer(models.Model):
     objects = AnswerManager()
 
     def __str__(self):
-        return f'Answer: {self.pk}'
+        return f'Answer:{self.pk}'
     
     

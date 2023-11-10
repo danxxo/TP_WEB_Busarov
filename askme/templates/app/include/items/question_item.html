@@ -1,0 +1,33 @@
+{% extends "app/include/templates/question_template.html" %}
+{% load static %}
+
+{% block question_avatar %}
+<a href="{% url 'app:question_detail' question.id %}">
+    <img src="{% static '/img/Avatar_rapuncel.jpg' %}" class="question-image" alt="question image">
+</a>
+{% endblock question_avatar %}
+
+{% block question_likes %}
+    {{ question.likes.all.count }}
+{% endblock question_likes %}
+
+{% block question_title %}
+    <a class="tag-link-black" href="{% url 'app:question_detail' question.id %}">
+        {{ question.title }}
+    </a>
+{% endblock question_title %}
+
+{% block question_content %}
+    {{ question.content }}
+{% endblock question_content %}
+
+{% block question_tags %}
+    {% for t in question.tags.all  %}
+        <span class="badge tags-bg-green">
+            <a class="tag-link-black" href="{{ t.get_absolute_url }}"> {{ t.name }}</a>
+        </span>
+    {% endfor %}
+{% endblock question_tags %}
+
+
+

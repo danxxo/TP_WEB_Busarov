@@ -74,21 +74,36 @@ def user_settings(request):
     )
 
 def login(request):
+    context = context_get(
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
     return render(
         request,
-        'app/login.html'
+        'app/login.html',
+        context
     )
 
 def signup(request):
+    context = context_get(
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
     return render(
         request,
-        'app/signup.html'
+        'app/signup.html',
+        context
     )
 
 def ask(request):
+    context = context_get(
+        best_members=Profile.objects.best_members(),
+        top_tags=Tag.objects.top_tags()
+    )
     return render(
         request,
-        'app/ask.html'
+        'app/ask.html',
+        context
     )
 
 def tag(request, tag):

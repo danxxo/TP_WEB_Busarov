@@ -289,3 +289,11 @@ main > .container {
     color: white;
     font-size: 20px;
 }
+
+a.tag-link-white {
+    color: white;
+}
+
+a.tag-link-black {
+    color: black;
+}

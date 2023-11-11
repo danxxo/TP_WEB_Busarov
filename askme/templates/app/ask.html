@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+  buSQues
+{% endblock %}
+
+{% block content %}
+            <h1 style="margin-bottom: 30px;">Ask new question</h1>
+            <div class="row">
+                <div class="col-1">
+                    <p class="new-question-title">Title</p>
+                </div>
+                <div class="col-10">
+                    <textarea class="new-question-small-textarea" placeholder="Whats your problem?"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <p class="new-question-title">Text</p>
+                </div>
+                <div class="col-10">
+                    <textarea class="new-question-big-textarea" placeholder="Describe your problem"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <p class="new-question-title">Tags</p>
+                </div>
+                <div class="col-10">
+                  <textarea class="new-question-small-textarea" placeholder="Fill correct tags to get answer faster"></textarea>
+                  <button type="button" class="btn btn-primary btn-lg">Ask</button>
+                </div>
+            </div>
+  {% endblock %}

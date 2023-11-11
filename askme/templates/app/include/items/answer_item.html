@@ -1,0 +1,13 @@
+{% extends "app/include/templates/answer_template.html" %}
+
+{% block answer_likes %}
+    {{ answer.likes.all.count }}
+{% endblock answer_likes%}
+
+{% block answer_content %}
+    {{ answer.content }}
+{% endblock answer_content %}
+
+{% block answer_isCorrect %}
+    {% if answer.isCorrect %} checked {% endif %}
+{% endblock answer_isCorrect %}

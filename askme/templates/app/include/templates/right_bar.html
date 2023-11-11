@@ -3,6 +3,9 @@
 
 <h1>Tags</h1>
 <div class="tags-right-bar">
+    {% if top_tags|length == 0 %}
+        <p>No Tags</p>
+    {% endif %}
     {% for tag in top_tags %}
         <span class="badge tags-bg-green">
             <a class="tag-link-white" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
@@ -12,6 +15,9 @@
 
 <h1>Top members</h1>
 <div class="top-members">
+    {% if best_members|length == 0 %}
+        <p>No Members</p>
+    {% endif %} 
     {% for member in best_members %}
         <div class="user">
             <a href="#"><span class="badge bg-success top-user">{{ member.profile.username }}</span></a>

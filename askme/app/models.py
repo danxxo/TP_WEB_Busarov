@@ -16,13 +16,11 @@ class QuestionManager(models.Manager):
 
 class AnswerManager(models.Manager):
     def top_answers(self, question):
-        return self.filter(question=question).annotate(
-            isCorrectOrder=models.Case(
-                models.When(isCorrect=True, then=models.Value(1)),
-                default=models.Value(2),
-                output_field=models.BooleanField(),
-            )
-        ).order_by('isCorrectOrder')
+        answers = self.filter(question=question)
+        correctAns = answers.filter(isCorrect=True).annotate(numLikes=models.Count('likes')).order_by('-numLikes')
+        notCorrectAns = answers.filter(isCorrect=False).annotate(numLikes=models.Count('likes')).order_by('-numLikes')
+        return correctAns.union(notCorrectAns, all=True)
+        
 
 class ProfileManager(models.Manager):
     def best_members(self, num=7):

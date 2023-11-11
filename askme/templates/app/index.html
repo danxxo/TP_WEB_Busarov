@@ -8,6 +8,9 @@
 {% block content %}
         <!-- QUESTIONS -->
         <h1>Questions</h1>
+        {% if page|length == 0 %}
+          <p style="font-size: 20px;">No Questions</p>
+        {% endif %}
 
         {% for question in page %}
           {% include 'app/include/items/question_item.html' %}    

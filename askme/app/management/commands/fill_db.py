@@ -18,61 +18,71 @@ class Command(BaseCommand):
         ratio = kwargs['ratio']
 
         profiles = []
+        users = []
         tags = []
         isCorrectChoices = [False] * 6 + [True]
-        print(isCorrectChoices)
         
-        # Create User and Profile
-        for i in range(ratio):
-            new_user = User.objects.create_user(username=f'user{i}')
-            new_user.set_password('pass')
-            new_user.save()
+        users = [
+            User(username=f'user{i}',
+                 password='pass') for i in range(ratio)
+        ]
+        User.objects.bulk_create(users)
+        profiles = [
+            Profile(profile=users[i]) for i in range(ratio)
+        ]
+        Profile.objects.bulk_create(profiles)
+        print("PROFILES ADDED")
 
-            new_profile = Profile.objects.create(profile=new_user)
-            new_profile.save()
-            profiles.append(new_profile)
+        tags = [
+            Tag(name=f'tag_{i}') for i in range(ratio)
+        ]
+        Tag.objects.bulk_create(tags)
+        print("TAGS ADDED")
 
-            new_tag = Tag.objects.create(name=f'Tag_{i}')
-            new_tag.save()
-            tags.append(new_tag)
+        random_users = [
+            random.choice(profiles) for i in range(ratio * 100)
+        ]
 
-        print('Users and Profiles created')
         print('Start creating questions')
-        # create Question 
+
+        questions = [
+            Question(
+                user=random_users[i],
+                title=f'Question {i}',
+                content=f'I need to know how to spell {i}. such a hard number',
+            ) for i in range(ratio * 10)
+        ]
+        Question.objects.bulk_create(questions)
+        print('------------------------')
+        random_tags = [
+            [random.choice(tags) for _ in range(4)] for _ in range(ratio * 10)
+        ]
+        print(len(random_tags), len(random_tags[0]))
+
+        random_likes = [
+            [random.choice(profiles) for _ in range(random.randrange(0, ratio))] for _ in range(ratio * 10)
+        ]
+
+        print('questions tagging and liking')
         for i in range(ratio * 10):
-            user = random.choice(profiles)
-            title = f'Question {i}'
-            content = f'I need to know how to spell {i}. such a hard number'
-            question_tags = []
-            for j in range(10):
-                tag = random.choice(tags)
-                if tag not in question_tags:
-                    question_tags.append(tag)
+            print(i, 'of', ratio*10)
+            questions[i].tags.set(random_tags[i])
+            questions[i].likes.set(random_likes[i])
 
-            new_question = Question.objects.create(
-                user=user,
-                title=title,
-                content=content,
-            )
-            new_question.tags.set(question_tags)
-            likes = profiles[random.randrange(0, ratio/2-1):random.randrange(ratio/2, ratio-1)]
-            new_question.likes.set(likes)
-            new_question.save()
-
-            # Create 10 Answers on Question
-            for _ in range(10):
-                user = random.choice(profiles)
-                new_answer = Answer.objects.create(
-                    question=new_question,
-                    user=user,
-                    content=f'That is simple to spell {i}. Answer by {user}',
+            answers = [
+                Answer(
+                    question=questions[i],
+                    user=profiles[j],
+                    content=f'Answer on Question{i} by number {j}',
                     isCorrect=random.choice(isCorrectChoices)
-                )
-                likes = profiles[random.randrange(0, ratio/2-1):random.randrange(ratio/2, ratio-1)]
-                new_question.likes.set(likes)
-                new_answer.likes.set(likes)
-                new_answer.save()
+                ) for j in range(10)
+            ]
+            Answer.objects.bulk_create(answers)
+            for j in range(len(answers)):
+                answers[j].likes.set(random_likes[j])
+
         
-        print('Created!')
+
+        
 
 

@@ -20,7 +20,6 @@ def paginate(objects, request, per_page=5):
         page = paginator.num_pages
 
     pg = paginator.page(page)
-    print(pg.object_list)
 
     return paginator.page(page)
 
@@ -74,36 +73,22 @@ def user_settings(request):
     )
 
 def login(request):
-    context = context_get(
-        best_members=Profile.objects.best_members(),
-        top_tags=Tag.objects.top_tags()
-    )
     return render(
         request,
         'app/login.html',
-        context
     )
 
 def signup(request):
-    context = context_get(
-        best_members=Profile.objects.best_members(),
-        top_tags=Tag.objects.top_tags()
-    )
+
     return render(
         request,
         'app/signup.html',
-        context
     )
 
 def ask(request):
-    context = context_get(
-        best_members=Profile.objects.best_members(),
-        top_tags=Tag.objects.top_tags()
-    )
     return render(
         request,
         'app/ask.html',
-        context
     )
 
 def tag(request, tag):

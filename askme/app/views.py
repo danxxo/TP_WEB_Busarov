@@ -1,5 +1,5 @@
 from random import randrange
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Question, Answer, Tag, Profile
 
@@ -51,7 +51,7 @@ def hot(request):
                 context)
 
 def question_detail(request, question_id):
-    question = Question.objects.get(pk=question_id)
+    question = get_object_or_404(Question, pk=question_id)
     answers = Answer.objects.top_answers(question_id)
     context = context_get(
         page=paginate(answers, request, per_page=5),
